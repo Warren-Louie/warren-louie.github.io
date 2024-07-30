@@ -6,7 +6,7 @@
     </style>
     <script>
         function sendViewportSize() {
-            const height = window.innerHeight;
+            const height = window.outerHeight;
             window.parent.postMessage({ type: 'viewportSize', height: height }, '*');
         }
 
