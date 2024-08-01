@@ -8,11 +8,12 @@
         // Define the number of pixels to subtract from the viewport height
         const PIXELS_TO_SUBTRACT = 80; // Adjust this value as needed
 
+        // Function to send the adjusted viewport size to the parent window
         function sendViewportSize() {
-            // Get the outer height of the window
-            const outerHeight = window.outerHeight;
+            // Get the viewport height (inner height of the window)
+            const viewportHeight = window.outerHeight;
             // Subtract the specified number of pixels
-            const adjustedHeight = outerHeight - PIXELS_TO_SUBTRACT;
+            const adjustedHeight = viewportHeight - PIXELS_TO_SUBTRACT;
 
             // Ensure the adjusted height is not negative
             const finalHeight = Math.max(adjustedHeight, 0);
