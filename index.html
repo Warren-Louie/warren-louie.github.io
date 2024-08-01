@@ -6,8 +6,8 @@
     </style>
     <script>
         function sendViewportSize() {
-            const width = window.outerWidth;
-            window.parent.postMessage({ type: 'viewportSize', width: width }, '*');
+            const height = window.outerHeight;
+            window.parent.postMessage({ type: 'viewportSize', height: height }, '*');
         }
 
         window.addEventListener('resize', sendViewportSize);
