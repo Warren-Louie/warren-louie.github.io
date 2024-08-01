@@ -6,8 +6,17 @@
     </style>
     <script>
         function sendViewportSize() {
-            const height = window.outerHeight;
-            window.parent.postMessage({ type: 'viewportSize', height: height }, '*');
+            const innerHeight = window.innerHeight;
+            const outerHeight = window.outerHeight;
+
+            // Estimate UI height as the difference between outerHeight and innerHeight
+            const estimatedUIHeight = outerHeight - innerHeight;
+
+            // Subtract estimated UI height from outerHeight to get the viewport height
+            const viewportHeight = outerHeight - estimatedUIHeight;
+
+            // Post the adjusted viewport height to the parent window
+            window.parent.postMessage({ type: 'viewportSize', height: viewportHeight }, '*');
         }
 
         window.addEventListener('resize', sendViewportSize);
@@ -17,4 +26,3 @@
 <body>
 </body>
 </html>
-
