@@ -5,23 +5,16 @@
         body { margin: 0; }
     </style>
     <script>
-        // Function to send the viewport size to the parent window
         function sendViewportSize() {
-            // Get the viewport width
-            const width = window.OuterWidth || document.documentElement.clientWidth;
-
-            // Send the viewport size to the parent window
+            const width = window.innerWidth;
             window.parent.postMessage({ type: 'viewportSize', width: width }, '*');
         }
 
-        // Add event listeners to send viewport size when the window is resized or loaded
         window.addEventListener('resize', sendViewportSize);
         window.addEventListener('load', sendViewportSize);
-
-        // Optional: send viewport size immediately after the script runs
-        sendViewportSize();
     </script>
 </head>
 <body>
 </body>
 </html>
+
