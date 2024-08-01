@@ -10,13 +10,17 @@
 
         // Function to send the adjusted viewport size to the parent window
         function sendViewportSize() {
-            // Get the viewport height (inner height of the window)
+            // Get the viewport height (outer height of the window)
             const viewportHeight = window.outerHeight;
             // Subtract the specified number of pixels
             const adjustedHeight = viewportHeight - PIXELS_TO_SUBTRACT;
 
             // Ensure the adjusted height is not negative
             const finalHeight = Math.max(adjustedHeight, 0);
+
+            // Log the height being sent for debugging
+            console.log('Viewport Height (outerHeight):', viewportHeight);
+            console.log('Adjusted Height (after subtraction):', finalHeight);
 
             // Send the adjusted height to the parent window
             window.parent.postMessage({ type: 'viewportSize', height: finalHeight }, '*');
@@ -25,6 +29,9 @@
         // Add event listeners to send the viewport height on resize and load
         window.addEventListener('resize', sendViewportSize);
         window.addEventListener('load', sendViewportSize);
+
+        // Send the initial viewport size
+        document.addEventListener('DOMContentLoaded', sendViewportSize);
     </script>
 </head>
 <body>
