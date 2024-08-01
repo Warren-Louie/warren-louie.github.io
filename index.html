@@ -8,14 +8,11 @@
         const PIXELS_TO_SUBTRACT = 80;
 
         function sendViewportSize() {
-            // Get the viewport height of the browser window
-            const viewportHeight = window.outerHeight;
-            // Calculate the adjusted height after subtracting the specified pixels
+            const viewportHeight = window.outerHeight;  // Get the height of the entire browser window
             const adjustedHeight = viewportHeight - PIXELS_TO_SUBTRACT;
-            // Ensure the final height is not negative
             const finalHeight = Math.max(adjustedHeight, 0);
 
-            // Log the height being sent for debugging
+            // Log to ensure the function is called and values are correct
             console.log('Sending viewport height:', viewportHeight);
             console.log('Sending adjusted height:', finalHeight);
 
@@ -23,11 +20,20 @@
             window.parent.postMessage({ type: 'viewportSize', height: finalHeight }, '*');
         }
 
-        // Send the viewport size when the page has fully loaded
-        window.addEventListener('load', sendViewportSize);
+        function initResizeListener() {
+            // Send the viewport size when the page initially loads
+            sendViewportSize();
+
+            // Add an event listener to send the viewport size whenever the window is resized
+            window.addEventListener('resize', sendViewportSize);
+        }
+
+        // Initialize the resize listener when the page is fully loaded
+        window.addEventListener('load', initResizeListener);
     </script>
 </head>
 <body>
 </body>
 </html>
+
 
