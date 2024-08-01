@@ -7,37 +7,24 @@
     <script>
         const PIXELS_TO_SUBTRACT = 80;
 
-// List of trusted origins
-const trustedOrigins = [
-    'https://www.warrenlouie.com/blank',
-    
-    // Add more origins as needed
-];
+        function sendViewportSize() {
+            const viewportHeight = window.outerHeight;  // Get the height of the entire browser window
+            const adjustedHeight = viewportHeight - PIXELS_TO_SUBTRACT;
+            const finalHeight = Math.max(adjustedHeight, 0);
 
-function sendViewportSize() {
-    const viewportHeight = window.outerHeight;
-    const adjustedHeight = viewportHeight - PIXELS_TO_SUBTRACT;
-    const finalHeight = Math.max(adjustedHeight, 0);
+            // Log to ensure the function is called and values are correct
+            console.log('Sending viewport height:', viewportHeight);
+            console.log('Sending adjusted height:', finalHeight);
 
-    // Log to ensure the function is called and values are correct
-    console.log('Sending viewport height:', viewportHeight);
-    console.log('Sending adjusted height:', finalHeight);
+            // Send the adjusted height to the parent window
+            window.parent.postMessage({ type: 'viewportSize', height: finalHeight }, '*');
+        }
 
-    // Send the message to each trusted origin
-    trustedOrigins.forEach(origin => {
-        window.parent.postMessage({ type: 'viewportSize', height: finalHeight }, origin);
-    });
-}
-
-window.addEventListener('resize', () => {
-    console.log('Resize event detected');
-    sendViewportSize();
-});
-window.addEventListener('load', sendViewportSize);
-document.addEventListener('DOMContentLoaded', sendViewportSize);
-
+        // Send the viewport size when the page has fully loaded
+        window.addEventListener('load', sendViewportSize);
     </script>
 </head>
 <body>
 </body>
 </html>
+
