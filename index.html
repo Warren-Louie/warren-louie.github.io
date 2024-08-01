@@ -8,7 +8,7 @@
         // Function to send the viewport size to the parent window
         function sendViewportSize() {
             // Get the viewport width
-            const width = window.innerWidth || document.documentElement.clientWidth;
+            const width = window.OuterWidth || document.documentElement.clientWidth;
 
             // Send the viewport size to the parent window
             window.parent.postMessage({ type: 'viewportSize', width: width }, '*');
