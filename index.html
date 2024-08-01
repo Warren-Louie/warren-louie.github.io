@@ -8,11 +8,14 @@
         const PIXELS_TO_SUBTRACT = 80;
 
         function sendViewportSize() {
-            const viewportHeight = window.outerHeight;  // Get the height of the entire browser window
+            // Get the viewport height of the browser window
+            const viewportHeight = window.outerHeight;
+            // Calculate the adjusted height after subtracting the specified pixels
             const adjustedHeight = viewportHeight - PIXELS_TO_SUBTRACT;
+            // Ensure the final height is not negative
             const finalHeight = Math.max(adjustedHeight, 0);
 
-            // Log to ensure the function is called and values are correct
+            // Log the height being sent for debugging
             console.log('Sending viewport height:', viewportHeight);
             console.log('Sending adjusted height:', finalHeight);
 
